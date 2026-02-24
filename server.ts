@@ -63,11 +63,13 @@ await fetch(
   });
 
 let botName = "";
+let botNameLowerCase = "";
 fetch(`${TELEGRAM_API}/bot${TELEGRAM_TOKEN}/getMe`)
   .then((e) => e.json())
   .then((e) => {
     console.log(e);
     botName = e.result?.username;
+    botNameLowerCase = `@${botName.toLowerCase()}`;
   });
 
 let REVISION;
@@ -253,8 +255,7 @@ const submitSearch = async (
   };
 };
 
-const messageIsMentioningBot = (botName: string, message: Message) => {
-  const botNameLowerCase = `@${botName.toLowerCase()}`;
+const messageIsMentioningBot = (message: Message) => {
   if (message.entities) {
     return message.entities.some(
       (entity) =>
@@ -535,7 +536,7 @@ const server = http.createServer({ keepAliveTimeout: 60000 }, async (req, res) =
           reaction: [],
         });
       } else if (message?.chat?.type === "group" || message?.chat?.type === "supergroup") {
-        if (messageIsMentioningBot(botName, message)) {
+        if (messageIsMentioningBot(message)) {
           await groupMessageHandler(message);
           setMessageReaction({
             chat_id: message.chat.id,
