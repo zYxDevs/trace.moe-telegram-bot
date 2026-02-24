@@ -2,32 +2,32 @@
   "name": "trace.moe-telegram-bot",
   "version": "2.1.2",
   "description": "This Telegram Bot can tell the anime when you send an screenshot to it",
-  "main": "server.ts",
+  "homepage": "https://github.com/soruly/trace.moe-telegram-bot",
+  "bugs": {
+    "url": "https://github.com/soruly/trace.moe-telegram-bot/issues"
+  },
+  "license": "MIT",
+  "author": "soruly",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soruly/trace.moe-telegram-bot.git"
+  },
   "type": "module",
+  "main": "server.ts",
   "scripts": {
     "start": "pm2 start ecosystem.config.json",
     "stop": "pm2 stop ecosystem.config.json",
     "restart": "pm2 restart ecosystem.config.json",
     "reload": "pm2 reload ecosystem.config.json",
     "delete": "pm2 delete ecosystem.config.json",
-    "prettier": "prettier",
-    "format": "prettier --write \"**/*.*\"",
-    "lint": "prettier --check \"**/*.*\"",
-    "test": "prettier --check \"**/*.*\""
+    "oxfmt": "oxfmt",
+    "format": "oxfmt --write \"**/*.*\"",
+    "lint": "oxfmt --check \"**/*.*\"",
+    "test": "oxfmt --check \"**/*.*\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/soruly/trace.moe-telegram-bot.git"
-  },
-  "author": "soruly",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/soruly/trace.moe-telegram-bot/issues"
-  },
-  "homepage": "https://github.com/soruly/trace.moe-telegram-bot",
   "devDependencies": {
     "@effect-ak/tg-bot-api": "^1.3.2",
     "@types/node": "^25.3.0",
-    "prettier": "^3.8.1"
+    "oxfmt": "^0.35.0"
   }
 }

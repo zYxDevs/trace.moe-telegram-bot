@@ -2,7 +2,7 @@ import child_process from "node:child_process";
 import crypto from "node:crypto";
 import http from "node:http";
 import sqlite from "node:sqlite";
-import packageConfig from "./package.json" with { type: "json" };
+
 import type {
   ExternalReplyInfo,
   Message,
@@ -12,6 +12,8 @@ import type {
   SendVideoInput,
   SetMessageReactionInput,
 } from "@effect-ak/tg-bot-api";
+
+import packageConfig from "./package.json" with { type: "json" };
 
 process.loadEnvFile();
 const {
