@@ -95,6 +95,8 @@ const getHelpMessage = async (botName: string, fromId: number) =>
 const escapeMarkdownV2 = (text: string) =>
   text.replace(/([\_\*\[\]\(\)\~\>\#\+\-\=\|\{\}\.\!])/g, "\\$1");
 
+const escapeCode = (text: string) => text.replace(/\\/g, "\\\\").replace(/`/g, "\\`");
+
 const sendMessage = (payload: SendMessageInput) =>
   fetch(`${TELEGRAM_API}/bot${TELEGRAM_TOKEN}/sendMessage`, {
     method: "POST",
@@ -237,9 +239,9 @@ const submitSearch = async (
   if (romaji && !titles.includes(romaji)) titles.push(romaji);
   if (english && !titles.includes(english)) titles.push(english);
 
-  text += titles.map((t) => `\`${t}\``).join("\n");
+  text += titles.map((t) => `\`${escapeCode(t)}\``).join("\n");
   text += "\n";
-  text += `\`${filename.replace(/`/g, "``")}\`\n`;
+  text += `\`${escapeCode(filename)}\`\n`;
   if (formatTime(from) === formatTime(to)) {
     text += `\`${formatTime(from)}\`\n`;
   } else {
