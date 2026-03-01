@@ -512,13 +512,14 @@ const getBody = async (req: http.IncomingMessage): Promise<string> => {
   return Buffer.concat(chunks).toString();
 };
 
+const SECRET_TOKEN_BUFFER = Buffer.from(SECRET_TOKEN);
 const server = http.createServer({ keepAliveTimeout: 60000 }, async (req, res) => {
   if (req.method === "POST") {
     const clientSecret = req.headers["x-telegram-bot-api-secret-token"];
     if (
       typeof clientSecret !== "string" ||
       clientSecret.length !== SECRET_TOKEN.length ||
-      !crypto.timingSafeEqual(Buffer.from(clientSecret), Buffer.from(SECRET_TOKEN))
+      !crypto.timingSafeEqual(Buffer.from(clientSecret), SECRET_TOKEN_BUFFER)
     ) {
       return res.writeHead(403).end();
     }
