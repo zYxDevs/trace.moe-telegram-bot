@@ -220,11 +220,8 @@ const submitSearch = async (
   }
   const searchResult = await response.json();
   if (response.status >= 400 || searchResult.error) {
-    return {
-      text: searchResult.error
-        ? `\`${searchResult.error.replace(/TELEGRAM_TOKEN/g, "{TELEGRAM_TOKEN}")}\``
-        : `Error: HTTP ${response.status}`,
-    };
+    console.error(searchResult.error || (await response.text()));
+    return { text: "`trace.moe API error, please try again later.`" };
   }
   if (searchResult?.result?.length <= 0) {
     return { text: "Cannot find any results from trace.moe" };
