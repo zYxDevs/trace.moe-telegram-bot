@@ -261,6 +261,7 @@ const messageIsMentioningBot = (message: Message) => {
     return message.entities.some(
       (entity) =>
         entity.type === "mention" &&
+        entity.length === botNameLowerCase.length &&
         message.text.substring(entity.offset, entity.offset + entity.length).toLowerCase() ===
           botNameLowerCase,
     );
@@ -269,6 +270,7 @@ const messageIsMentioningBot = (message: Message) => {
     return message.caption_entities.some(
       (entity) =>
         entity.type === "mention" &&
+        entity.length === botNameLowerCase.length &&
         message.caption.substring(entity.offset, entity.offset + entity.length).toLowerCase() ===
           botNameLowerCase,
     );
